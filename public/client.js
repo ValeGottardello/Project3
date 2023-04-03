@@ -16,6 +16,7 @@ async function initMap() {
   map.addListener('center_changed', () => {
     currentLocation.textContent = map.getCenter()
   })
+  
   fetch('/api/stations/all')
     .then((response) => response.json())
     .then((data) =>
@@ -27,6 +28,21 @@ async function initMap() {
           ),
           map,
           title: station.name,
+        })
+        marker.addListener(marker, 'mouseover', (event) => {
+          marker.setLabel(event.title)
+        })
+
+        const popupContent = `<h3>${station.name}</h3>
+        <p>${station.address}</p>`
+        const infowindow = new google.maps.InfoWindow({
+          content: popupContent,
+        })
+        marker.addListener('click', () => {
+          infowindow.open({
+            anchor: marker,
+            map,
+          })
         })
       }),
     )
