@@ -7,5 +7,3 @@ async function initMap() {
     minZoom: 10,
   })
 }
-
-window.initMap = initMap
