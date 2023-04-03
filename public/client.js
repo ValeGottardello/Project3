@@ -16,4 +16,20 @@ async function initMap() {
   map.addListener('center_changed', () => {
     currentLocation.textContent = map.getCenter()
   })
+  //const response = await
+  fetch('/api/stations/all')
+    .then((response) => response.json())
+    .then((data) =>
+      data.forEach((station) => {
+        console.log(station)
+        var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(
+            Number(station.latitude),
+            Number(station.longitude),
+          ),
+          map,
+          title: station.name,
+        })
+      }),
+    )
 }
