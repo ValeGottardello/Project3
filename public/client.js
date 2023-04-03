@@ -17,12 +17,10 @@ async function initMap() {
     currentLocation.textContent = map.getCenter()
   })
 
-  //const response = await
   fetch('/api/stations/all')
     .then((response) => response.json())
     .then((data) =>
       data.forEach((station) => {
-        console.log(station)
         var marker = new google.maps.Marker({
           position: new google.maps.LatLng(
             Number(station.latitude),
@@ -32,8 +30,19 @@ async function initMap() {
           title: station.name,
         })
         marker.addListener(marker, 'mouseover', (event) => {
-          console.log(marker.title)
           marker.setLabel(event.title)
+        })
+
+        const popupContent = `<h3>${station.name}</h3>
+        <p>${station.address}</p>`
+        const infowindow = new google.maps.InfoWindow({
+          content: popupContent,
+        })
+        marker.addListener('click', () => {
+          infowindow.open({
+            anchor: marker,
+            map,
+          })
         })
       }),
     )
