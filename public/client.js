@@ -11,14 +11,9 @@ async function initMap() {
 
   const currentLocation = document.getElementById('current-location')
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      }
-      currentLocation.innerHTML = `${position.coords.latitude},  ${position.coords.longitude}`
-    })
-  }
+  currentLocation.textContent = map.getCenter()
 
+  map.addListener('center_changed', () => {
+    currentLocation.textContent = map.getCenter()
+  })
 }
