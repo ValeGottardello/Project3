@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css/style.css">
+    
 </head>
 <body>
     <aside id="left">
@@ -23,13 +24,19 @@
         </section>
     </aside>
     
-    <main id="centre"></main>
+    <main id="centre">
+        <div id="map"></div>
+    </main>
 
     <aside id="right">
         <section id="time"><p>time</p></section>
         <section id="initlocation"><p>centre location</p></section>
         <section id="nearest"><p>nearest</p></section>
     </aside>
+
+
+    <script src="client.js"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=<%= API_KEY %>&callback=initMap"></script>
 
 
 </body>
