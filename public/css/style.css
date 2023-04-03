@@ -1,0 +1,10 @@
+* {
+    box-sizing: border-box;
+    border: 1px solid red;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr 600px 1fr;
+}
+
