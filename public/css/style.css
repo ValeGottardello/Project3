@@ -7,4 +7,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 600px 1fr;
 }
-
+#map{
+    height: 100%;
+    width: 100%;
+}
