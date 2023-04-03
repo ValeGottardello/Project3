@@ -16,6 +16,7 @@ async function initMap() {
   map.addListener('center_changed', () => {
     currentLocation.textContent = map.getCenter()
   })
+
   //const response = await
   fetch('/api/stations/all')
     .then((response) => response.json())
@@ -29,6 +30,10 @@ async function initMap() {
           ),
           map,
           title: station.name,
+        })
+        marker.addListener(marker, 'mouseover', (event) => {
+          console.log(marker.title)
+          marker.setLabel(event.title)
         })
       }),
     )
