@@ -1,4 +1,4 @@
-const db = require('../config')
+const db = require('../db')
 
 class Station {
   static findAll() {
