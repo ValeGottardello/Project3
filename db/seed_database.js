@@ -9,6 +9,7 @@ stations
   .map((station) => {
     const values = station.split(',')
     return [
+      values[5],
       values[7],
       values[9],
       values[10],
@@ -20,8 +21,8 @@ stations
   .forEach((station) => {
     const sql = `
       INSERT INTO
-      stations (name, address, suburb, state, latitude, longitude)
-      VALUES ($1, $2, $3, $4, $5, $6);
+      stations (name, owner, address, suburb, state, latitude, longitude)
+      VALUES ($1, $2, $3, $4, $5, $6, $7);
     `
     db.query(sql, station)
   })
