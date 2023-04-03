@@ -1,7 +1,7 @@
-require('dotenv').config()
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 8080
+const config = require('./config')
+
 const Station = require('./models/stations.js')
 const Owners = require('./models/owners.js')
 
@@ -9,7 +9,7 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.render('index', { API_KEY: process.env.API_KEY })
+  res.render('index', { api_key: config.api_key })
 })
 
 app.get('/api/stations/all', (req, res, next) => {
@@ -24,6 +24,6 @@ app.get('/api/owners', (req, res, next) => {
     .catch(next)
 })
 
-app.listen(port, () => {
-  console.log(`Listening in port ${port}`)
+app.listen(config.port, () => {
+  console.log(`Listening in port ${config.port}`)
 })
