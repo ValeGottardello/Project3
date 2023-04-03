@@ -7,7 +7,21 @@ body {
     display: grid;
     grid-template-columns: 1fr 600px 1fr;
 }
+
+#stats-table {
+    width: 100%;
+}
+
+.owner {
+    text-align: left;
+}
+
+.total {
+    text-align: right;
+}
+
 #map{
     height: 100%;
     width: 100%;
 }
+
