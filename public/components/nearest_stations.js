@@ -1,4 +1,4 @@
-const nearStationList = document.querySelector('#nearest')
+const nearStationList = document.querySelector('#nearest-placeholder')
 import { fetchNearStations } from '../stations_api.js'
 
 export function renderEachStation(stations) {
