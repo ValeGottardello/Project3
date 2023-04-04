@@ -1,5 +1,5 @@
 export function fetchNearStations() {
-  return fetch('/api/stations/all').then((res) => res.json())
+  return fetch('/api/stations/nearest').then((res) => res.json())
 }
 
 export function fetchRandomStation() {
