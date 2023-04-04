@@ -16,18 +16,6 @@ async function initMap() {
     currentLocation.textContent = map.getCenter()
   })
 
-<<<<<<< HEAD
-  function renderMarkers() {
-    fetch('/api/stations/all')
-      .then((response) => response.json())
-      .then((data) =>
-        data.forEach((station) => {
-          const marker = new google.maps.Marker({
-            position: new google.maps.LatLng(
-              Number(station.latitude),
-              Number(station.longitude),
-            ),
-=======
   fetch('/api/stations/all')
     .then((response) => response.json())
     .then((data) =>
@@ -62,7 +50,6 @@ async function initMap() {
         marker.addListener('click', () => {
           infowindow.open({
             anchor: marker,
->>>>>>> 967905c (rebase)
             map,
             title: station.name,
           })
