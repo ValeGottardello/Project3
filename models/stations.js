@@ -29,6 +29,14 @@ class Station {
       .query('SELECT COUNT(*) FROM stations;')
       .then((res) => res.rows[0].count)
   }
+  static findNearest(lat, lng) {
+    const sql = `
+      SELECT *, SQRT( POWER( CAST( latitude AS float ) - ( $1 ), 2 ) + POWER( CAST( longitude AS float ) - ( $2 ), 2 ) ) * 111 AS distance
+      FROM stations
+      ORDER BY distance ASC LIMIT 700;
+    `
+    return db.query(sql, [lat, lng]).then((res) => res.rows)
+  }
 }
 
 module.exports = Station

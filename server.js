@@ -33,6 +33,7 @@ app.get('/api/stations/random', (req, res, next) => {
 
 app.get('/api/stations/nearest', (req, res, next) => {
   const { lat, lng, radius } = req.query
+  Station.findNearest(lat, lng).then((nearest) => res.json(nearest))
 })
 
 app.get('/api/stats', (req, res, next) => {
