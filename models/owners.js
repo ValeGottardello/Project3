@@ -17,15 +17,12 @@ class Owners {
       'Ampol',
     ]
 
-    let arrData = []
+    const sql =
+      'SELECT owner, COUNT(*) AS count FROM stations GROUP BY owner ORDER BY count DESC;'
 
-    arrOfOwn.forEach((owner) => {
-      const sql = 'SELECT COUNT owner FROM stations WHERE owner = $1;'
-      db.query(sql, [owner]).then((res) => {
-        arrData.push({ owner: owner, count: res.rows.count })
-      })
+    return db.query(sql).then((res) => {
+      return { owners: res.rows }
     })
-    return { owners: arrData }
   }
 }
 
