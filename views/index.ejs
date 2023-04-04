@@ -9,7 +9,13 @@
 </head>
 <body>
     <aside id="left">
-        <section id="spotlight"><h2>Spotlight</h2></section>
+      <section id="spotlight">
+        <h2>Spotlight</h2>
+        <button>Refresh</button>
+        <p id="spotlight-title"></p>
+        <p id="spotlight-address"></p>
+          
+      </section>
 
         <section id="stats">
             <div id="total-info">
@@ -20,7 +26,7 @@
             
             </table> 
 
-        </section>
+      </section>
 
         <section id="latest"><h2>Latest</h2></section>
 
@@ -54,6 +60,7 @@
     <script type="module" src="/components/stats_columns.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="module" src="/components/nearest_stations.js"></script>
+    <script type="module" src="/components/spotlight.js"></script>
     <script type="module" src="/components/clock.js"></script>
     <script type="module" src="/components/oil_price.js"></script>
     <script type="module" src="/stations_api.js"></script>
