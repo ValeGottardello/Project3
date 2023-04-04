@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const config = require('./config')
+const axios = require('axios')
 
 const Station = require('./models/stations.js')
 const Owners = require('./models/owners.js')
@@ -22,6 +23,19 @@ app.get('/api/owners', (req, res, next) => {
   Owners.every()
     .then((owners) => res.json(owners))
     .catch(next)
+})
+
+app.get('/api/commodities', (req, res, next) => {
+  axios
+    .get(
+      `https://commodities-api.com/api/latest?access_key=${config.commoditiesapi_key}&base=USD&symbols=WTIOIL%2CBRENTOIL%2CNG`,
+    )
+    .then((res) => {
+      return res.data
+    })
+    .then((data) => {
+      return res.json(data)
+    })
 })
 
 app.listen(config.port, () => {
