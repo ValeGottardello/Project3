@@ -3,8 +3,6 @@ import { fetchCommodities } from '../commodities_api.js'
 function search() {
   fetchCommodities().then((res) => {
     let container = document.getElementById('latest')
-    console.log(res.data)
-    //res.data.data((priceData) => {
     let priceData = res.data
     let date = `<p>${priceData.date} </p>`
     let brentOil = `<p>Brent oil ${Number(1 / priceData.rates.BRENTOIL).toFixed(
