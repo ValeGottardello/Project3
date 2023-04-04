@@ -24,15 +24,15 @@ app.get('/api/stations/random', (req, res, next) => {
     .catch(next)
 })
 
-app.get('/api/owners', (req, res, next) => {
-  Owners.every()
-    .then((owners) => res.json(owners))
+app.get('/api/stats', (req, res, next) => {
+  Station.calculateTotalStations()
+    .then((obj) => res.json(obj))
     .catch(next)
 })
 
-app.get('/api/owners/total', (req, res, next) => {
-  Owners.calculateTotalStations()
-    .then((obj) => res.json(obj))
+app.get('/api/owners', (req, res, next) => {
+  Owners.every()
+    .then((owners) => res.json(owners))
     .catch(next)
 })
 
