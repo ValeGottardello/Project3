@@ -2,7 +2,7 @@ async function initMap() {
   const map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: -37.840935, lng: 144.946457 },
     zoom: 13,
-    minZoom: 10,
+    // minZoom: 10,
     mylocationEnabled: true,
   })
 
@@ -28,7 +28,23 @@ async function initMap() {
             ),
             map,
             title: station.name,
+            icon: {
+              url: [
+                'Caltex',
+                'BP',
+                'Shell',
+                '7-Eleven Pty Ltd',
+                'United',
+              ].includes(station.owner)
+                ? `/icons/${station.owner}.png`
+                : '/icons/Default.png',
+              scaledSize: {
+                height: 32,
+                width: 32,
+              },
+            },
           })
+
           marker.addListener(marker, 'mouseover', (event) => {
             marker.setLabel(event.title)
           })
