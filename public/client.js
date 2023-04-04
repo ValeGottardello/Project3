@@ -3,6 +3,7 @@ async function initMap() {
     center: { lat: -33.87995, lng: 151.200886 },
     zoom: 13,
     minZoom: 10,
+    mylocationEnabled: true,
   })
 
   infoWindow = new google.maps.InfoWindow()
@@ -44,4 +45,11 @@ async function initMap() {
         })
       }),
     )
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const { latitude, longitude } = pos.coords
+      map.setCenter(new google.maps.LatLng(latitude, longitude))
+    })
+  }
 }
