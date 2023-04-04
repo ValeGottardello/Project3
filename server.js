@@ -32,7 +32,12 @@ app.get('/api/stations/random', (req, res, next) => {
 })
 
 app.get('/api/stats', (req, res, next) => {
-  Station.calculateTotalStations()
+  Station.calculateOwnStat()
+    .then((obj) => {
+      return Station.totalStation().then((res) => {
+        return { ...obj, total_stations: res }
+      })
+    })
     .then((obj) => res.json(obj))
     .catch(next)
 })

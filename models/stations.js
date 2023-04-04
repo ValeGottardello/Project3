@@ -17,30 +17,19 @@ class Station {
       .query('SELECT * FROM stations ORDER BY RANDOM() LIMIT 1;')
       .then((res) => res.rows[0])
   }
-  static async calculateTotalStations() {
-    const arrOfOwn = [
-      'Caltex',
-      'BP',
-      'Shell',
-      '7-Eleven Pty Ltd',
-      'Independent Fuel Supplies',
-      'United',
-      'Ampol',
-    ]
-
+  static async calculateOwnStat() {
     const sql =
       'SELECT owner, COUNT(*) AS count FROM stations GROUP BY owner ORDER BY count DESC;'
 
     return db.query(sql).then((res) => {
-      res.rows = res.rows.slice(0, 15)
       return { owners: res.rows }
     })
+  }
+  static totalStation() {
+    return db
+      .query('SELECT COUNT(*) FROM stations;')
+      .then((res) => res.rows[0].count)
   }
 }
 
 module.exports = Station
-
-// return db.query(sql).then((res) => {
-//   const values = res.owners.slice(0, 15)
-//   return { owners: values }
-// })
