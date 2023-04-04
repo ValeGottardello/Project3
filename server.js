@@ -31,6 +31,10 @@ app.get('/api/stations/random', (req, res, next) => {
     .catch(next)
 })
 
+app.get('/api/stations/nearest', (req, res, next) => {
+  const { lat, lng, radius } = req.query
+})
+
 app.get('/api/stats', (req, res, next) => {
   Station.calculateOwnStat()
     .then((obj) => {
