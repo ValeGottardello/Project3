@@ -31,8 +31,8 @@ app.get('/api/owners', (req, res, next) => {
 })
 
 app.get('/api/owners/total', (req, res, next) => {
-  Station.calculateTotalStations()
-    .then((object) => res.json(object))
+  Owners.calculateTotalStations()
+    .then((obj) => res.json(obj))
     .catch(next)
 })
 

@@ -6,7 +6,7 @@ class Owners {
       .query('SELECT DISTINCT owner FROM stations;')
       .then((res) => res.rows)
   }
-  static calculateTotalStations() {
+  static async calculateTotalStations() {
     const arrOfOwn = [
       'Caltex',
       'BP',
@@ -17,13 +17,15 @@ class Owners {
       'Ampol',
     ]
 
-    // arrOfOwn.forEach((owner) => {
-    //   const sql = 'SELECT * FROM stations WHERE owner = $1;'
-    //   db.query(sql, [owner]).then((owner) => {
-    //     owner = owner.rows
-    //     owner.reduce((acc, owner.))
-    //   })
-    // })
+    let arrData = []
+
+    arrOfOwn.forEach((owner) => {
+      const sql = 'SELECT COUNT owner FROM stations WHERE owner = $1;'
+      db.query(sql, [owner]).then((res) => {
+        arrData.push({ owner: owner, count: res.rows.count })
+      })
+    })
+    return { owners: arrData }
   }
 }
 
