@@ -1,13 +1,18 @@
-const randomStation = document.querySelector('#spotlight')
+let randomStation = document.querySelector('#spotlight-placeholder')
+const refreshButton = document.querySelector('button')
 import { fetchRandomStation } from '../stations_api.js'
 
-export function renderStation(station) {
-  let stationElement = `<article data-id="${station.id}" class="station">
-      <p>${station.name}</p>
-      <p>${station.address}</p>
-  </article>`
+function renderStation() {
+  console.log('click')
+  fetchRandomStation().then((res) => {
+    let stationElement = `<article data-id="${res.id}" class="station">
+        <p><a href="${res.id}">${res.name}</a></p>
+        <p>${res.address}</p>
+    </article>`
 
-  randomStation.innerHTML += stationElement
+    randomStation.innerHTML = stationElement
+  })
 }
+renderStation()
 
-fetchRandomStation().then(renderStation)
+refreshButton.addEventListener('click', renderStation)
