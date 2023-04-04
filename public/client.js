@@ -16,40 +16,16 @@ async function initMap() {
     currentLocation.textContent = map.getCenter()
   })
 
-  fetch('/api/stations/all')
-    .then((response) => response.json())
-    .then((data) =>
-      data.forEach((station) => {
-        const icon = new google.maps.Icon({
-          url: `/icons/${station.owner}.png`,
-          // scaledSize: {
-          //   width: 16,
-          //   height: 16,
-          // },
-        })
-
-        const marker = new google.maps.Marker({
-          position: new google.maps.LatLng(
-            Number(station.latitude),
-            Number(station.longitude),
-          ),
-          map,
-          title: station.name,
-          icon,
-        })
-
-        marker.addListener(marker, 'mouseover', (event) => {
-          marker.setLabel(event.title)
-        })
-
-        const popupContent = `<h3>${station.name}</h3>
-        <p>${station.address}</p>`
-        const infowindow = new google.maps.InfoWindow({
-          content: popupContent,
-        })
-        marker.addListener('click', () => {
-          infowindow.open({
-            anchor: marker,
+  function renderMarkers() {
+    fetch('/api/stations/all')
+      .then((response) => response.json())
+      .then((data) =>
+        data.forEach((station) => {
+          const marker = new google.maps.Marker({
+            position: new google.maps.LatLng(
+              Number(station.latitude),
+              Number(station.longitude),
+            ),
             map,
             title: station.name,
           })
