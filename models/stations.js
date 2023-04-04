@@ -32,9 +32,15 @@ class Station {
       'SELECT owner, COUNT(*) AS count FROM stations GROUP BY owner ORDER BY count DESC;'
 
     return db.query(sql).then((res) => {
+      res.rows = res.rows.slice(0, 15)
       return { owners: res.rows }
     })
   }
 }
 
 module.exports = Station
+
+// return db.query(sql).then((res) => {
+//   const values = res.owners.slice(0, 15)
+//   return { owners: values }
+// })
