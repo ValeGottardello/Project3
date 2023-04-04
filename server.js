@@ -19,6 +19,12 @@ app.get('/api/stations/all', (req, res, next) => {
     .catch(next)
 })
 
+// app.get('/api/stations/nearby', (req, res, next) => {
+//   Station.findNearby()
+//     .then((stations) => res.json(stations))
+//     .catch(next)
+// })
+
 app.get('/api/stations/random', (req, res, next) => {
   Station.findRandomStation()
     .then((randomStat) => res.json(randomStat))

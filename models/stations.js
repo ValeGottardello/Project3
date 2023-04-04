@@ -6,6 +6,12 @@ class Station {
       return res.rows.slice(0, 400)
     })
   }
+  // static findNearby() {
+  //   return db.query('select * from stations where latitude').then((res) => {
+  //     return res.rows.slice(0, 400)
+  //     return res.rows
+  //   })
+  // }
   static findRandomStation() {
     return db
       .query('SELECT * FROM stations ORDER BY RANDOM() LIMIT 1;')
