@@ -8,8 +8,7 @@ class Station {
   }
   // static findNearby() {
   //   return db.query('select * from stations where latitude').then((res) => {
-  //     return res.rows.slice(0, 400)
-  //     return res.rows
+  //
   //   })
   // }
   static findRandomStation() {
