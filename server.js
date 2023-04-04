@@ -19,6 +19,18 @@ app.get('/api/stations/all', (req, res, next) => {
     .catch(next)
 })
 
+app.get('/api/stations/random', (req, res, next) => {
+  Station.findRandomStation()
+    .then((randomStat) => res.json(randomStat))
+    .catch(next)
+})
+
+app.get('/api/stats', (req, res, next) => {
+  Station.calculateTotalStations()
+    .then((obj) => res.json(obj))
+    .catch(next)
+})
+
 app.get('/api/owners', (req, res, next) => {
   Owners.every()
     .then((owners) => res.json(owners))
