@@ -1,3 +1,3 @@
 export function fetchNearStations() {
-  return axios.get('/api/stations/all').then((res) => res.data)
+  return fetch('/api/stations/all').then((res) => res.json())
 }
