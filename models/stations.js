@@ -38,7 +38,7 @@ class Station {
   }
   static findNearest(lat, lng) {
     const sql = `
-      SELECT *, SQRT( POWER( CAST( latitude AS float ) - ( $1 ), 2 ) + POWER( CAST( longitude AS float ) - ( $2 ), 2 ) ) * 111 AS distance
+      SELECT *, calculate_distance($1, $2, latitude, longitude, 'K') AS distance
       FROM stations
       ORDER BY distance ASC LIMIT 700;
     `
@@ -46,9 +46,9 @@ class Station {
   }
   static findStatsByBounds(lat1, lat2, long1, long2) {
     const sql = `
-    SELECT * FROM stations 
-    WHERE CAST(latitude AS float) BETWEEN $1 AND $2 
-    AND CAST(longitude AS float) BETWEEN $3 AND $4;
+      SELECT * FROM stations 
+      WHERE latitude BETWEEN $1 AND $2 
+      AND longitude BETWEEN $3 AND $4;
     `
     return db.query(sql, [lat1, lat2, long1, long2]).then((res) => res.rows)
   }
