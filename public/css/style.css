@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    /* border: 1px solid red; */
     font-size: small;
 }
 
@@ -16,7 +15,6 @@ table {
 th {
     font-weight: 100;
     padding: 0;
-    /* border: 1px solid black; */
 }
 
 tr:nth-child(odd) {
@@ -48,7 +46,6 @@ section {
 
 #left {
     height: 97vh;
-    /* overflow-y: scroll; */
     overflow-y: hidden;
 }
 #spotlight {
