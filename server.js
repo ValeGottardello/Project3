@@ -33,14 +33,16 @@ app.get('/api/stations/random', (req, res, next) => {
 
 app.get('/api/stations/nearest', (req, res, next) => {
   const { lat, lng, radius } = req.query
-  Station.findNearest(lat, lng).then((nearest) => res.json(nearest))
+  Station.findNearest(lat, lng)
+    .then((nearest) => res.json(nearest))
+    .catch(next)
 })
 
 app.get('/api/stations/bounds', (req, res, next) => {
   let { lat1, lat2, long1, long2 } = req.query
-  Station.findStatsByBounds(lat1, lat2, long1, long2).then((dbRes) =>
-    res.json(dbRes),
-  )
+  Station.findStatsByBounds(lat1, lat2, long1, long2)
+    .then((dbRes) => res.json(dbRes))
+    .catch(next)
 })
 
 app.get('/api/stations/:id', (req, res, next) => {
@@ -77,6 +79,7 @@ app.get('/api/commodities', (req, res, next) => {
     .then((data) => {
       return res.json(data)
     })
+    .catch(next)
 })
 
 app.listen(config.port, () => {
