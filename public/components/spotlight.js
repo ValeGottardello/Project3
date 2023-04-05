@@ -1,4 +1,5 @@
 let randomStation = document.querySelector('#spotlight-placeholder')
+let randomStationImg = document.querySelector('.spotlight-image')
 const refreshButton = document.querySelector('button')
 import { fetchRandomStation } from '../stations_api.js'
 
@@ -10,6 +11,16 @@ function renderStation() {
     </article>`
 
     randomStation.innerHTML = stationElement
+    // randomStationImg.innerHTML = `<p>a</p>`
+    randomStationImg.innerHTML = `
+    <img src="/icons/${
+      ['Caltex', 'BP', 'Shell', '7-Eleven Pty Ltd', 'United'].includes(
+        res.owner,
+      )
+        ? res.owner
+        : 'Default'
+    }.png" width="32" height="32">
+    `
   })
 }
 

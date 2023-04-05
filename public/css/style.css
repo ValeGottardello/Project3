@@ -103,3 +103,19 @@ section {
     border-bottom: 1px solid black;
 }
 
+img {
+    display: inline-block;
+}
+
+
+.nearby-main {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.spotlight-main {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+/* .spotlight-text {}
+.spotlight-image {} */
