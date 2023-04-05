@@ -42,7 +42,9 @@ function renderListStations(station) {
       </div>
       <div clas="nearby-right">
         <p>${station.name} <b>${roundedDist}m</b></p>
-        <p>${station.address}</p>
+        <p class="address">${station.address} ${station.suburb}, ${
+    station.state
+  }</p>
         <p>${station.owner}</p>
       </div>
     </div>
