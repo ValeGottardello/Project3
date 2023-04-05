@@ -145,11 +145,7 @@ async function initMap() {
 //   }
 
 function linkClick(markerId) {
-  console.log(markerId)
   axios.get(`/api/stations/${markerId}`).then((station) => {
-    console.log('Station and Marker ID match found')
-    console.log(station.data)
-
     const newMap = new google.maps.Map(document.getElementById('map'), {
       center: { lat: +station.data.latitude, lng: +station.data.longitude },
       zoom: 15,
