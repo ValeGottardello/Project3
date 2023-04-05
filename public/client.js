@@ -22,7 +22,13 @@ async function initMap() {
   // })
 
   function renderMarkers() {
-    fetch('/api/stations/all')
+    const bounds = map.getBounds()
+    const ne = bounds.getNorthEast()
+    const sw = bounds.getSouthWest()
+
+    fetch(
+      `/api/stations/bounds?lat1=${sw.lat()}&lat2=${ne.lat()}&long1=${sw.lng()}&long2=${ne.lng()}`,
+    )
       .then((response) => response.json())
       .then((data) =>
         data.forEach((station) => {
@@ -56,7 +62,7 @@ async function initMap() {
           })
 
           const popupContent = `<h3>${station.name}</h3>
-                <p>${station.address}</p>`
+              <p>${station.address}</p>`
           const infowindow = new google.maps.InfoWindow({
             content: popupContent,
           })
@@ -79,6 +85,7 @@ async function initMap() {
       map.setCenter(new google.maps.LatLng(latitude, longitude))
     })
   }
+
   // if (currentLocation.textContent !== undefined) {
   //   console.log('current location')
   //   loadNearStations()
