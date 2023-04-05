@@ -7,6 +7,7 @@ async function initMap() {
     // minZoom: 10,
     mylocationEnabled: true,
   })
+  const geocoder = new google.maps.Geocoder()
 
   window.map = map
 
@@ -14,7 +15,7 @@ async function initMap() {
 
   const currentLocation = document.getElementById('current-location')
 
-  currentLocation.textContent = map.getCenter()
+  // currentLocation.textContent = map.getCenter()
 
   // map.addListener('center_changed', () => {
   //   currentLocation.textContent = map.getCenter()
@@ -68,7 +69,7 @@ async function initMap() {
       )
   }
 
-  renderMarkers()
+  // renderMarkers()
   // loadNearStations()
 
   if (navigator.geolocation) {
@@ -93,8 +94,19 @@ async function initMap() {
   }
 
   const processChange = debounce(() => {
-    console.log('hey')
-    currentLocation.textContent = map.getCenter()
+    // console.log('hey')
+    const center = map.getCenter()
+    geocoder
+      .geocode({
+        location: {
+          lat: center.lat(),
+          lng: center.lng(),
+        },
+      })
+      .then(
+        (res) =>
+          (currentLocation.textContent = res.results[0].formatted_address),
+      )
     renderMarkers()
     loadNearStations()
   })
