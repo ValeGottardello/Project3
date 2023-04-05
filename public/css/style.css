@@ -112,5 +112,10 @@ img {
     display: grid;
     grid-template-columns: 1fr 4fr;
 }
-.nearby-left {}
-.nearby-right {}
+
+.spotlight-main {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+/* .spotlight-text {}
+.spotlight-image {} */
