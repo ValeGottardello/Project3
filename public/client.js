@@ -10,6 +10,7 @@ async function initMap() {
   const geocoder = new google.maps.Geocoder()
 
   window.map = map
+  window.markers = []
 
   infoWindow = new google.maps.InfoWindow()
 
@@ -20,6 +21,11 @@ async function initMap() {
   // map.addListener('center_changed', () => {
   //   currentLocation.textContent = map.getCenter()
   // })
+
+  function removeMarkers() {
+    markers.forEach((marker) => marker.setMap(null))
+    markers = []
+  }
 
   function renderMarkers() {
     const bounds = map.getBounds()
@@ -56,6 +62,8 @@ async function initMap() {
               },
             },
           })
+
+          markers.push(marker)
 
           marker.addListener(marker, 'mouseover', (event) => {
             marker.setLabel(event.title)
@@ -103,6 +111,7 @@ async function initMap() {
 
   const processChange = debounce(() => {
     // console.log('hey')
+    removeMarkers()
     const center = map.getCenter()
     geocoder
       .geocode({
