@@ -43,6 +43,12 @@ app.get('/api/stations/bounds', (req, res, next) => {
   )
 })
 
+app.get('/api/stations/:id', (req, res, next) => {
+  Station.findStationById(req.params.id)
+    .then((stationInfo) => res.json(stationInfo))
+    .catch(next)
+})
+
 app.get('/api/stats', (req, res, next) => {
   Station.calculateOwnStat()
     .then((obj) => {

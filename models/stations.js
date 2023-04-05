@@ -16,6 +16,13 @@ class Station {
       .query('SELECT * FROM stations ORDER BY RANDOM() LIMIT 1;')
       .then((res) => res.rows[0])
   }
+
+  static findStationById(id) {
+    return db
+      .query('SELECT * FROM stations WHERE id = $1', [id])
+      .then((res) => res.rows[0])
+  }
+
   static async calculateOwnStat() {
     const sql =
       'SELECT owner, COUNT(*) AS count FROM stations GROUP BY owner ORDER BY count DESC;'
