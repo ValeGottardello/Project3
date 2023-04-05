@@ -33,6 +33,7 @@ async function initMap() {
             ),
             map,
             title: station.name,
+            id: station.id,
             icon: {
               url: [
                 'Caltex',
@@ -142,3 +143,42 @@ async function initMap() {
 //   for (var i = 0; i < results.length; i++) {
 //     createMarker(results[i]);
 //   }
+
+function linkClick(markerId) {
+  axios.get(`/api/stations/${markerId}`).then((station) => {
+    const newMap = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: +station.data.latitude, lng: +station.data.longitude },
+      zoom: 15,
+      mylocationEnabled: true,
+    })
+
+    const currentLocation = document.getElementById('current-location')
+    currentLocation.textContent = newMap.getCenter()
+
+    let spotlightMarker = new google.maps.Marker({
+      position: new google.maps.LatLng(
+        Number(station.data.latitude),
+        Number(station.data.longitude),
+      ),
+      map: newMap,
+      title: station.data.name,
+      id: station.data.id,
+      address: station.data.address,
+    })
+
+    const popupContent = `<h3>${station.data.name}</h3>
+                <p>${station.data.address}</p>`
+    const infowindow = new google.maps.InfoWindow({
+      content: popupContent,
+    })
+
+    infowindow.open({
+      anchor: spotlightMarker,
+      map: newMap,
+    })
+
+    spotlightMarker.addListener(spotlightMarker, 'mouseover', (event) => {
+      spotlightMarker.setLabel(station.data.title)
+    })
+  })
+}
