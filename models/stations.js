@@ -37,6 +37,14 @@ class Station {
     `
     return db.query(sql, [lat, lng]).then((res) => res.rows)
   }
+  static findStatsByBounds(lat1, lat2, long1, long2) {
+    const sql = `
+    SELECT * FROM stations 
+    WHERE CAST(latitude AS float) BETWEEN $1 AND $2 
+    AND CAST(longitude AS float) BETWEEN $3 AND $4;
+    `
+    return db.query(sql, [lat1, lat2, long1, long2]).then((res) => res.rows)
+  }
 }
 
 module.exports = Station
