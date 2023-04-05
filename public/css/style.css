@@ -27,6 +27,14 @@ h3 {
     margin: 5px;
 }
 
+p {
+    margin: 0 auto;
+}
+
+article {
+    margin: 10px auto;
+}
+
 body {
     display: grid;
     /* grid-template-columns: 500px 1fr 500px; */
