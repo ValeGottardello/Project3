@@ -55,3 +55,7 @@ class Station {
 }
 
 module.exports = Station
+
+// http://localhost:8080/api/stations/bounds?lat1=-37…&long1=145.1494076571038&long2=145.08486297936943'
+// http://localhost:8080/api/stations/bounds?lat1=-37.73425959354424&lat2=-37.94316958721066&long1=145.11781682112797&long2=145.0532721433936
+// SELECT * FROM stations WHERE CAST(latitude AS float) BETWEEN -37.73425959354424 AND -37.94316958721066 AND CAST(longitude AS float) BETWEEN 145.11781682112797 AND 145.0532721433936

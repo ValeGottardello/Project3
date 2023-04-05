@@ -23,12 +23,12 @@ async function initMap() {
 
   function renderMarkers() {
     const bounds = map.getBounds()
-    // const ne = bounds.getNorthEast()
-    // const sw = bounds.getSouthWest()
-    // console.log(ne.lat(), ne.long(), sw.lat(), sw.lgn())
-    console.log(bounds)
-    // fetch('/api/stations/bounds')
-    fetch('/api/stations/all')
+    const ne = bounds.getNorthEast()
+    const sw = bounds.getSouthWest()
+
+    fetch(
+      `/api/stations/bounds?lat1=${sw.lat()}&lat2=${ne.lat()}&long1=${sw.lng()}&long2=${ne.lng()}`,
+    )
       .then((response) => response.json())
       .then((data) =>
         data.forEach((station) => {
@@ -62,7 +62,7 @@ async function initMap() {
           })
 
           const popupContent = `<h3>${station.name}</h3>
-                <p>${station.address}</p>`
+              <p>${station.address}</p>`
           const infowindow = new google.maps.InfoWindow({
             content: popupContent,
           })
@@ -151,7 +151,6 @@ async function initMap() {
 //     createMarker(results[i]);
 //   }
 
-<<<<<<< HEAD
 function linkClick(markerId) {
   axios.get(`/api/stations/${markerId}`).then((station) => {
     const newMap = new google.maps.Map(document.getElementById('map'), {
@@ -190,52 +189,3 @@ function linkClick(markerId) {
     })
   })
 }
-=======
-// function renderMarkers() {
-//   fetch('/api/stations/all')
-//     .then((response) => response.json())
-//     .then((data) =>
-//       data.forEach((station) => {
-//         const marker = new google.maps.Marker({
-//           position: new google.maps.LatLng(
-//             Number(station.latitude),
-//             Number(station.longitude),
-//           ),
-//           map,
-//           title: station.name,
-//           icon: {
-//             url: [
-//               'Caltex',
-//               'BP',
-//               'Shell',
-//               '7-Eleven Pty Ltd',
-//               'United',
-//             ].includes(station.owner)
-//               ? `/icons/${station.owner}.png`
-//               : '/icons/Default.png',
-//             scaledSize: {
-//               height: 32,
-//               width: 32,
-//             },
-//           },
-//         })
-
-//         marker.addListener(marker, 'mouseover', (event) => {
-//           marker.setLabel(event.title)
-//         })
-
-//         const popupContent = `<h3>${station.name}</h3>
-//               <p>${station.address}</p>`
-//         const infowindow = new google.maps.InfoWindow({
-//           content: popupContent,
-//         })
-//         marker.addListener('click', () => {
-//           infowindow.open({
-//             anchor: marker,
-//             map,
-//           })
-//         })
-//       }),
-//     )
-// }
->>>>>>> a6533ec (update to rebase)
