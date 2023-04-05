@@ -1,35 +1,23 @@
 const directionsService = new google.maps.DirectionsService()
 const directionsRenderer = new google.maps.DirectionsRenderer()
+const nearestTable = document.getElementById('nearest-placeholder')
 directionsRenderer.setMap(map)
 
-let directionsRequest = {
-  origin: LatLng | String | google.maps.Place,
-  destination: LatLng | String | google.maps.Place,
-  waypoints: [
-    { location: 'Melbourne, Victoria' },
-    { location: 'Sydney, New South Wales' },
-  ],
-  travelMode: 'DRIVING',
-  language: 'en',
+function calcRoute(address) {
+  var request = {
+    origin: map.getCenter(),
+    destination: address,
+    travelMode: 'DRIVING',
+  }
+  directionsService.route(request, function (result, status) {
+    if (status == 'OK') {
+      directionsRenderer.setDirections(result)
+    }
+  })
 }
 
-// let directionRequest = {
-//     origin: LatLng | String | google.maps.Place,
-//     destination: LatLng | String | google.maps.Place,
-//     travelMode: TravelMode,
-//     transitOptions: TransitOptions,
-//     drivingOptions: DrivingOptions,
-//     unitSystem: UnitSystem,
-//     waypoints[]: DirectionsWaypoint,
-//     optimizeWaypoints: Boolean,
-//     provideRouteAlternatives: Boolean,
-//     avoidFerries: Boolean,
-//     avoidHighways: Boolean,
-//     avoidTolls: Boolean,
-//     region: String
-//   }
-directionsService.route(directionsRequest, function (response, status) {
-  if (status == 'OK') {
-    directionsRenderer.setDirections(response)
-  }
+nearestTable.addEventListener('click', (evt) => {
+  evt.preventDefault()
+  const address = evt.target.closest('.address').textContent
+  calcRoute(address)
 })
