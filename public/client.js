@@ -11,6 +11,7 @@ async function initMap() {
 
   window.map = map
   window.markers = []
+  window.geocoder = geocoder
 
   infoWindow = new google.maps.InfoWindow()
 
