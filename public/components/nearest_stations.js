@@ -30,7 +30,13 @@ function renderListStations(station) {
 
   return `
   <article data-id="${station.id}" class="station">
-    <img src="/icons/${station.owner}.png" width="32" height="32">
+    <img src="/icons/${
+      ['Caltex', 'BP', 'Shell', '7-Eleven Pty Ltd', 'United'].includes(
+        station.owner,
+      )
+        ? station.owner
+        : 'Default'
+    }.png" width="32" height="32">
     <p>${station.name} <b>${roundedDist}m</b></p>
     <p>${station.address}</p>
     <p>${station.owner}</p>
