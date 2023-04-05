@@ -1,6 +1,6 @@
 export function fetchNearStations() {
-  const currentLocation = document.getElementById('current-location')
-  const [lat, lng] = currentLocation.textContent.slice(1, -1).split(', ')
+  const currentLocation = String(map.getCenter())
+  const [lat, lng] = currentLocation.slice(1, -1).split(', ')
   const radius = 10
 
   return fetch(

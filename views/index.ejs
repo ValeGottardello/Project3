@@ -62,6 +62,10 @@
     <script type="module" src="/components/stats_columns.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="module" src="/components/nearest_stations.js"></script>
+    <script type="module">
+      import { loadNearStations } from "/components/nearest_stations.js";
+      window.loadNearStations = loadNearStations;
+    </script>
     <script type="module" src="/components/clock.js"></script>
     <script type="module" src="/components/spotlight.js"></script>
     <script type="module" src="/components/oil_price.js"></script>
