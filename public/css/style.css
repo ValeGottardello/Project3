@@ -135,3 +135,11 @@ img {
 }
 /* .spotlight-text {}
 .spotlight-image {} */
+
+.hidden {
+    display: none !important;
+}
+
+.expanded {
+    grid-template-columns: 1fr !important;
+}
