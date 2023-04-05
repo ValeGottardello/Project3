@@ -18,4 +18,6 @@ function renderListStations(station) {
     `
 }
 
-fetchNearStations().then(renderEachStation)
+export function loadNearStations() {
+  fetchNearStations().then(renderEachStation)
+}

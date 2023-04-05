@@ -1,3 +1,5 @@
+// const loadNearStations = require('./components/nearest_stations.js')
+
 async function initMap() {
   const map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: -37.840935, lng: 144.946457 },
@@ -6,15 +8,17 @@ async function initMap() {
     mylocationEnabled: true,
   })
 
+  window.map = map
+
   infoWindow = new google.maps.InfoWindow()
 
   const currentLocation = document.getElementById('current-location')
 
   currentLocation.textContent = map.getCenter()
 
-  map.addListener('center_changed', () => {
-    currentLocation.textContent = map.getCenter()
-  })
+  // map.addListener('center_changed', () => {
+  //   currentLocation.textContent = map.getCenter()
+  // })
 
   function renderMarkers() {
     fetch('/api/stations/all')
@@ -65,6 +69,7 @@ async function initMap() {
   }
 
   renderMarkers()
+  // loadNearStations()
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((pos) => {
@@ -72,16 +77,40 @@ async function initMap() {
       map.setCenter(new google.maps.LatLng(latitude, longitude))
     })
   }
+  // if (currentLocation.textContent !== undefined) {
+  //   console.log('current location')
+  //   loadNearStations()
+  // }
 
-  map.addListener('zoom_changed', () => {
-    console.log('refresh')
+  function debounce(func, timeout = 1000) {
+    let timer
+    return (...args) => {
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        func.apply(this, args)
+      }, timeout)
+    }
+  }
+
+  const processChange = debounce(() => {
+    console.log('hey')
+    currentLocation.textContent = map.getCenter()
     renderMarkers()
+    loadNearStations()
   })
 
-  map.addListener('dragend', () => {
-    console.log('refresh')
-    renderMarkers()
-  })
+  map.addListener('idle', processChange)
+  // map.addListener('zoom_changed', () => {
+  //   console.log('refresh')
+  //   renderMarkers()
+  //   loadNearStations()
+  // })
+
+  // map.addListener('dragend', () => {
+  //   console.log('refresh')
+  //   renderMarkers()
+  //   loadNearStations()
+  // })
 }
 
 // PLEASE LEAVE THIS HERE FOR NOW I HAVE GONE INTO A RABBIT HOLE TO FIGURE HOW TO RENDER ONLY WHAT IS ON THE MAP. IT MAY BE USEFUL LATER.
