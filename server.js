@@ -35,6 +35,12 @@ app.get('/api/stations/nearest', (req, res, next) => {
   const { lat, lng, radius } = req.query
   Station.findNearest(lat, lng).then((nearest) => res.json(nearest))
 })
+app.get('/api/stations/bounds', (req, res, next) => {
+  let { lat1, long1, lat2, long2 } = req.query
+  Station.findStatsByBounds({ lat1, long1, lat2, long2 }).then((dbRes) =>
+    res.json(dbRes),
+  )
+})
 
 app.get('/api/stats', (req, res, next) => {
   Station.calculateOwnStat()

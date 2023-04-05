@@ -37,6 +37,7 @@ class Station {
     `
     return db.query(sql, [lat, lng]).then((res) => res.rows)
   }
+  static findStatsByBounds() {}
 }
 
 module.exports = Station
