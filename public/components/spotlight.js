@@ -3,7 +3,7 @@ const refreshButton = document.querySelector('button')
 import { fetchRandomStation } from '../stations_api.js'
 
 function renderStation() {
-  console.log('click')
+  // console.log('click')
   fetchRandomStation().then((res) => {
     let stationElement = `<article data-id="${res.id}" class="station">
         <p><a href="${res.id}">${res.name}</a></p>
