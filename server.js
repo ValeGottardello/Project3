@@ -21,7 +21,7 @@ app.get('/api/stations/random', (req, res, next) => {
 
 app.get('/api/stations/nearest', (req, res, next) => {
   const { lat, lng, radius } = req.query
-  Station.nearest(lat, lng)
+  Station.nearest(lat, lng, radius)
     .then((nearest) => res.json(nearest))
     .catch(next)
 })
