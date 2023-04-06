@@ -6,7 +6,7 @@ class Owners {
       .query('SELECT DISTINCT owner FROM stations;')
       .then((res) => res.rows)
   }
-  static calculateOwnStat() {
+  static stats() {
     const sql =
       'SELECT owner, COUNT(*) AS count FROM stations GROUP BY owner ORDER BY count DESC;'
 
