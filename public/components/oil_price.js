@@ -1,42 +1,24 @@
-import { fetchCommodities } from '../commodities_api.js'
+import { fetchCommodities } from '../apis/commodities_api.js'
+
+const commoditiesInfo = document.getElementById('latest')
 
 function search() {
   fetchCommodities().then((res) => {
-    let container = document.getElementById('latest')
-    let priceData = res.data
-    let date = `<p>${priceData.date} </p>`
-    let brentOil = `<p>Brent oil ${Number(1 / priceData.rates.BRENTOIL).toFixed(
-      2,
-    )} USD per barrel</p>`
+    const priceData = res.data
 
-    let ng = `<p>Natural gas ${Number(1 / priceData.rates.NG).toFixed(
-      2,
-    )} USD per MMBtu</p>`
-
-    let wtiOil = `<p>WTI oil ${Number(1 / priceData.rates.WTIOIL).toFixed(
-      2,
-    )} USD per barrel</p>`
-
-    container.innerHTML += date
-    container.innerHTML += wtiOil
-    container.innerHTML += brentOil
-    container.innerHTML += ng
+    commoditiesInfo.innerHTML = `
+      <p>${priceData.date} </p>
+      <p>Brent oil ${Number(1 / priceData.rates.BRENTOIL).toFixed(
+        2,
+      )} USD per barrel</p>
+      <p>Natural gas ${Number(1 / priceData.rates.NG).toFixed(
+        2,
+      )} USD per MMBtu</p>
+      <p>WTI oil ${Number(1 / priceData.rates.WTIOIL).toFixed(
+        2,
+      )} USD per barrel</p>
+    `
   })
 }
 
 search()
-
-// const time = document.getElementById('time')
-// const timeDisplay = time.querySelector('h2')
-
-// export function refreshTime() {
-//   const dateString = new Date().toLocaleString('en-AU', {
-//     weekday: 'short',
-//     hour: 'numeric',
-//     minute: 'numeric',
-//     second: 'numeric',
-//   })
-//   timeDisplay.innerText = dateString
-// }
-
-// setInterval(refreshTime, 1000)

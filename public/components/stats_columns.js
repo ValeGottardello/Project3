@@ -1,20 +1,20 @@
-import { fetchStatsInfo } from '../stats_api.js'
-// import { fetchStatsInfo, fetchTotalStats } from '../info_stats.js'
-const table = document.querySelector('#stats-table')
-const titles = document.querySelector('#total-info')
+import { fetchStats } from '../apis/stats_api.js'
 
-export function renderInfoStats(data) {
-  table.innerHTML = data.owners
+const ownersTable = document.querySelector('#stats-table')
+const totals = document.querySelector('#total-info')
+
+function renderStats(data) {
+  ownersTable.innerHTML = data.owners
     .slice(0, 7)
     .map((owner) => {
-      return renderlistOwners(owner)
+      return renderOwnerEntry(owner)
     })
     .join('')
 
-  titles.innerHTML = renderTotOwn(data)
+  totals.innerHTML = renderTotals(data)
 }
 
-function renderlistOwners(owner) {
+function renderOwnerEntry(owner) {
   return `
       <tr>
           <th class="owner">${owner.owner}</th>
@@ -23,7 +23,7 @@ function renderlistOwners(owner) {
       `
 }
 
-function renderTotOwn(data) {
+function renderTotals(data) {
   return `
       <h2>Stats</h2>
       <h3>Total Stations: ${data.total_stations}</h3>
@@ -31,11 +31,4 @@ function renderTotOwn(data) {
       `
 }
 
-function renderTotStat(total) {
-  console.log(total)
-  return `
-      <h3>Total stats: ${total}</h3>
-      `
-}
-
-fetchStatsInfo().then(renderInfoStats)
+fetchStats().then(renderStats)
