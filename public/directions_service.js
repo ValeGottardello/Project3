@@ -27,6 +27,7 @@ nearestTable.addEventListener('click', (evt) => {
   const directionSelector = evt.target.closest('.nearby-main')
   if (!directionSelector) return
   const address = directionSelector.querySelector('.address').textContent
+  directionsRenderer.setMap(map)
   calcRoute(address)
 })
 
