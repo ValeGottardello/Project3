@@ -143,3 +143,8 @@ img {
 .expanded {
     grid-template-columns: 1fr !important;
 }
+.btn:hover {
+    background-color: #555555;
+    color: white;
+    border-radius: 5px;
+  }
