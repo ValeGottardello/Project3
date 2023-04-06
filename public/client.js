@@ -128,9 +128,10 @@ function linkClick(markerId) {
       map.setZoom(15)
       setTimeout(() => {
         const spotlightMarker = markers.filter(
-          (marker) => marker.title === data.name,
+          (marker) =>
+            marker.infowindow.content.split('\n')[1].trim().slice(3, -4) ===
+            data.address,
         )[0]
-        console.log(spotlightMarker.infowindow)
         spotlightMarker.infowindow.open({
           anchor: spotlightMarker,
           map,

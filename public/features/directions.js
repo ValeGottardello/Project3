@@ -33,6 +33,6 @@ nearestTable.addEventListener('click', (evt) => {
 
 refreshDirect.addEventListener('click', () => {
   directionsRenderer.setMap(null)
-  map.setCenter(map.getCenter())
-  map.setZoom(13)
+  // map.setCenter(map.getCenter())
+  // map.setZoom(13)
 })
