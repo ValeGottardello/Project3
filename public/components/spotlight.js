@@ -11,7 +11,6 @@ function renderStation() {
     </article>`
 
     randomStation.innerHTML = stationElement
-    // randomStationImg.innerHTML = `<p>a</p>`
     randomStationImg.innerHTML = `
     <img src="/icons/${
       ['Caltex', 'BP', 'Shell', '7-Eleven Pty Ltd', 'United'].includes(
