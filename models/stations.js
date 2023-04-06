@@ -19,13 +19,16 @@ class Station {
       .then((res) => res.rows[0])
   }
 
-  static nearest(lat, lng) {
+  static nearest(lat, lng, radius) {
     const sql = `
-      SELECT *, calculate_distance($1, $2, latitude, longitude, 'K') AS distance
-      FROM stations
-      ORDER BY distance ASC LIMIT 700;
+      SELECT * FROM (
+        SELECT *, calculate_distance($1, $2, latitude, longitude, 'K') AS distance
+        FROM stations
+        ORDER BY distance ASC LIMIT 700
+      ) AS stations 
+      WHERE distance <= $3;
     `
-    return db.query(sql, [lat, lng]).then((res) => res.rows)
+    return db.query(sql, [lat, lng, radius]).then((res) => res.rows)
   }
 
   static nearbyWithinBounds(lat1, lat2, long1, long2) {
