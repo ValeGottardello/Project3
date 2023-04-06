@@ -52,18 +52,19 @@
           </section>
 
           <section id="nearest">
-            <h2>Nearest</h2>
-            <p class="reset">Reset directions</h4>
+            <header>
+              <h2>Nearest</h2>
+              <button class="invisible">Reset Directions</button>
+            </header>
             <table id="nearest-placeholder"></table>
           </section>
       </aside>
     </div>
     
-    <script async src="https://maps.googleapis.com/maps/api/js?key=<%= maps_api_key %>&libraries=places&callback=initMap"></script>
     <script type="module">
       import { loadNearStations } from "/components/nearest_stations.js";
       window.loadNearStations = loadNearStations;
-    </script>
+      </script>
     <script type="module" src="/features/directions.js"></script>
     <script type="module" src="/features/hide_sidebars.js"></script>
     <script type="module" src="/components/clock.js"></script>
@@ -72,5 +73,6 @@
     <script type="module" src="/components/commodities.js"></script>
     <script type="module" src="/components/nearest_stations.js"></script>
     <script src="client.js"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=<%= maps_api_key %>&libraries=places&callback=initMap"></script>
 </body>
 </html>

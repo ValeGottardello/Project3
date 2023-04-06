@@ -95,6 +95,11 @@ section {
     overflow-x: auto;
 }
 
+#nearest header {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 #right .station {
     border-top: 2px solid grey;
     padding-top: 10px;
@@ -138,6 +143,10 @@ img {
 
 .hidden {
     display: none !important;
+}
+
+.invisible {
+    visibility: hidden;
 }
 
 .expanded {

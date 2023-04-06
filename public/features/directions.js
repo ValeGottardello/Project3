@@ -2,7 +2,7 @@ const directionsService = new google.maps.DirectionsService()
 const directionsRenderer = new google.maps.DirectionsRenderer()
 const nearestTable = document.getElementById('nearest-placeholder')
 directionsRenderer.setMap(map)
-const refreshDirect = document.querySelector('.reset')
+const resetDirections = document.querySelector('#nearest button')
 
 function calcRoute(address) {
   const request = {
@@ -29,10 +29,10 @@ nearestTable.addEventListener('click', (evt) => {
   const address = directionSelector.querySelector('.address').textContent
   directionsRenderer.setMap(map)
   calcRoute(address)
+  resetDirections.classList.remove('invisible')
 })
 
-refreshDirect.addEventListener('click', () => {
+resetDirections.addEventListener('click', () => {
   directionsRenderer.setMap(null)
-  map.setCenter(map.getCenter())
-  map.setZoom(13)
+  resetDirections.classList.add('invisible')
 })
