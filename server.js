@@ -52,7 +52,7 @@ app.get('/api/stations/:id', (req, res, next) => {
 })
 
 app.get('/api/stats', (req, res, next) => {
-  Station.calculateOwnStat()
+  Owners.calculateOwnStat()
     .then((obj) => {
       return Station.totalStation().then((res) => {
         return { ...obj, total_stations: res }

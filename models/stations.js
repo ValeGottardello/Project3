@@ -22,15 +22,6 @@ class Station {
       .query('SELECT * FROM stations WHERE id = $1', [id])
       .then((res) => res.rows[0])
   }
-
-  static async calculateOwnStat() {
-    const sql =
-      'SELECT owner, COUNT(*) AS count FROM stations GROUP BY owner ORDER BY count DESC;'
-
-    return db.query(sql).then((res) => {
-      return { owners: res.rows }
-    })
-  }
   static totalStation() {
     return db
       .query('SELECT COUNT(*) FROM stations;')
