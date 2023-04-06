@@ -10,51 +10,39 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.render('index', { api_key: config.api_key })
+  res.render('index', { maps_api_key: config.maps_api_key })
 })
-
-app.get('/api/stations/all', (req, res, next) => {
-  Station.findAll()
-    .then((stations) => res.json(stations))
-    .catch(next)
-})
-
-// app.get('/api/stations/nearby', (req, res, next) => {
-//   Station.findNearby()
-//     .then((stations) => res.json(stations))
-//     .catch(next)
-// })
 
 app.get('/api/stations/random', (req, res, next) => {
-  Station.findRandomStation()
+  Station.random()
     .then((randomStat) => res.json(randomStat))
     .catch(next)
 })
 
 app.get('/api/stations/nearest', (req, res, next) => {
   const { lat, lng, radius } = req.query
-  Station.findNearest(lat, lng)
+  Station.nearest(lat, lng)
     .then((nearest) => res.json(nearest))
     .catch(next)
 })
 
 app.get('/api/stations/bounds', (req, res, next) => {
   let { lat1, lat2, long1, long2 } = req.query
-  Station.findStatsByBounds(lat1, lat2, long1, long2)
+  Station.nearbyWithinBounds(lat1, lat2, long1, long2)
     .then((dbRes) => res.json(dbRes))
     .catch(next)
 })
 
 app.get('/api/stations/:id', (req, res, next) => {
-  Station.findStationById(req.params.id)
+  Station.findById(req.params.id)
     .then((stationInfo) => res.json(stationInfo))
     .catch(next)
 })
 
 app.get('/api/stats', (req, res, next) => {
-  Station.calculateOwnStat()
+  Owners.stats()
     .then((obj) => {
-      return Station.totalStation().then((res) => {
+      return Station.totalCount().then((res) => {
         return { ...obj, total_stations: res }
       })
     })
@@ -71,14 +59,10 @@ app.get('/api/owners', (req, res, next) => {
 app.get('/api/commodities', (req, res, next) => {
   axios
     .get(
-      `https://commodities-api.com/api/latest?access_key=${config.commoditiesapi_key}&base=USD&symbols=WTIOIL%2CBRENTOIL%2CNG`,
+      `https://commodities-api.com/api/latest?access_key=${config.commodities_api_key}&base=USD&symbols=WTIOIL%2CBRENTOIL%2CNG`,
     )
-    .then((res) => {
-      return res.data
-    })
-    .then((data) => {
-      return res.json(data)
-    })
+    .then((res) => res.data)
+    .then((data) => res.json(data))
     .catch(next)
 })
 

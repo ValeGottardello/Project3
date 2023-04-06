@@ -37,7 +37,6 @@
           <p>Maria <a href="https://github.com/ValeGottardello" target="_blank">https://github.com/ValeGottardello</a></p>
           <p>&copy; Bugs Repellent</p>
         </section>
-
       </aside>
       
       <main id="center">
@@ -60,23 +59,18 @@
       </aside>
     </div>
     
-    <script type="module" src="/components/stats_columns.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script type="module" src="/components/nearest_stations.js"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=<%= maps_api_key %>&libraries=places&callback=initMap"></script>
     <script type="module">
       import { loadNearStations } from "/components/nearest_stations.js";
       window.loadNearStations = loadNearStations;
     </script>
+    <script type="module" src="/features/directions.js"></script>
+    <script type="module" src="/features/hide_sidebars.js"></script>
     <script type="module" src="/components/clock.js"></script>
     <script type="module" src="/components/spotlight.js"></script>
-    <script type="module" src="/components/oil_price.js"></script>
-    <script type="module" src="/stations_api.js"></script>
-    <script type="module" src="/commodities_api.js"></script>
-    <script type="module" src="/components/shortcut.js"></script>
+    <script type="module" src="/components/stats.js"></script>
+    <script type="module" src="/components/commodities.js"></script>
+    <script type="module" src="/components/nearest_stations.js"></script>
     <script src="client.js"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=<%= api_key %>&libraries=places&callback=initMap"></script>
-    <script type="module" src="/directions_service.js"></script>
-    
-
 </body>
 </html>
