@@ -1,4 +1,4 @@
-import { fetchRandomStation } from '../stations_api.js'
+import { fetchRandomStation } from '../apis/stations_api.js'
 
 const randomStationInfo = document.querySelector('#spotlight-placeholder')
 const randomStationImg = document.querySelector('.spotlight-image')

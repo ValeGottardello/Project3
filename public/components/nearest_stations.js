@@ -1,4 +1,4 @@
-import { fetchNearStations } from '../stations_api.js'
+import { fetchNearStations } from '../apis/stations_api.js'
 
 const nearStationsList = document.querySelector('#nearest-placeholder')
 
