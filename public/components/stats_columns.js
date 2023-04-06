@@ -1,4 +1,4 @@
-import { fetchStatsInfo } from '../info_stats.js'
+import { fetchStatsInfo } from '../stats_api.js'
 // import { fetchStatsInfo, fetchTotalStats } from '../info_stats.js'
 const table = document.querySelector('#stats-table')
 const titles = document.querySelector('#total-info')
