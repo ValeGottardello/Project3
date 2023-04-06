@@ -10,7 +10,7 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.render('index', { api_key: config.api_key })
+  res.render('index', { maps_api_key: config.maps_api_key })
 })
 
 app.get('/api/stations/random', (req, res, next) => {
@@ -59,7 +59,7 @@ app.get('/api/owners', (req, res, next) => {
 app.get('/api/commodities', (req, res, next) => {
   axios
     .get(
-      `https://commodities-api.com/api/latest?access_key=${config.commoditiesapi_key}&base=USD&symbols=WTIOIL%2CBRENTOIL%2CNG`,
+      `https://commodities-api.com/api/latest?access_key=${config.commodities_api_key}&base=USD&symbols=WTIOIL%2CBRENTOIL%2CNG`,
     )
     .then((res) => res.data)
     .then((data) => res.json(data))
