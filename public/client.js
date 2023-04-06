@@ -69,6 +69,7 @@ async function initMap() {
           })
 
           marker['infowindow'] = infowindow
+          marker['address'] = station.address
 
           marker.addListener('click', () => {
             infowindow.open({
@@ -128,9 +129,7 @@ function linkClick(markerId) {
       map.setZoom(15)
       setTimeout(() => {
         const spotlightMarker = markers.filter(
-          (marker) =>
-            marker.infowindow.content.split('\n')[1].trim().slice(3, -4) ===
-            data.address,
+          (marker) => marker.address === data.address,
         )[0]
         spotlightMarker.infowindow.open({
           anchor: spotlightMarker,
