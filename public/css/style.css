@@ -37,6 +37,8 @@ article {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     height: 95vh;
+    max-width: 2000px;
+    margin: 0 auto;
 }
 
 #main-wrapper > * {
