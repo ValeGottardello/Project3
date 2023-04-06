@@ -105,6 +105,7 @@ section {
 #right .station {
   border-top: 2px solid grey;
   padding-top: 10px;
+  cursor: pointer;
 }
 
 #stats-table {
